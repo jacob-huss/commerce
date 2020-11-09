@@ -1,71 +1,50 @@
-<!DOCTYPE HTML>
-  <html xmlns:th="http://www.thymeleaf.org" lang="en">
-  <head>
-      <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  </head>
-  <body>
-  <div th:replace="fragments :: navbar" ></div>
- 
-  <main role="main">
-      <!-- Main jumbotron for a primary marketing message or call to action -->
-      <div class="jumbotron">
-          <div class="container">
-              <h1 class="display-3">Tech Talent Store</h1>
-              <p>This is a small e-commerce application that allows the user to purchase some of a few products that are offered here. </p>
-              <p><a class="btn btn-primary btn-lg" href="/about" role="button">Learn more &raquo;</a></p>
-          </div>
-      </div>
- 
-      <div class="card-deck">
-        <div class="card">
-          <img class="card-img-top" src="..." alt="Card image cap">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-          </div>
-          <div class="card-footer">
-            <small class="text-muted">Last updated 3 mins ago</small>
-          </div>
+<head th:replace="fragments/fragments :: head"></head>
+
+<body>
+
+    <div th:replace="fragments/fragments :: navbar"></div>
+
+    <main role="main">
+
+        <div class="jumbotron">
+            <div class="container">
+
+                <h1 class="display-3">Tech Talent Store</h1>
+
+                <p>This is a small e-commerce application that allows a user to purchase some of a few products that are
+                    offered
+                    here.</p>
+
+                <p><a href="/about" class="btn btn-primary btn-large" role="button">Learn More &raquo;</a></p>
+
+            </div>
         </div>
-        <div class="card">
-          <img class="card-img-top" src="..." alt="Card image cap">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-          </div>
-          <div class="card-footer">
-            <small class="text-muted">Last updated 3 mins ago</small>
-          </div>
-        </div>
-        <div class="card">
-          <img class="card-img-top" src="..." alt="Card image cap">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-          </div>
-          <div class="card-footer">
-            <small class="text-muted">Last updated 3 mins ago</small>
-          </div>
-        </div>
-      </div>
-              
-              <!--Fill this part in-->
-          </div>
-      </div>
-  </main>
- 
-  <footer th:replace="fragments :: footer"></footer>
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>  
+
+        <div class="container">
+            <div class="row">
+                <div class="container">
+                    <div class="row">
+                        <div class="card col-md-3 small-product-card" th:each="product:${products}">
+                            <a th:href="@{/product/{id}(id=${product.getId()})}"><img th:alt="${product.name}"
+                                    th:src="@{${product.image}}" class="card-img" /></a>
+                            <div class="card-body">
+                                <div class="card-title">
+                                    <h4 th:text="${product.name}"></h4>
+                                    <h5 class="card-text" th:text="${#numbers.formatCurrency(product.price)}"></h5>
+                                    <small th:text="${product.getBrand()}"></small>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+    </main>
+
+    <footer th:replace="fragments/fragments :: footer"></footer>
 </body>
-  </html>
 
+</html>
